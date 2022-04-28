@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McDonald App</title>
+    
+    <link rel="stylesheet" href="./McDonalds.css">
+</head>
+
+<body bgcolor="#fe3200">
+
+    <h1><i> McDonald's Order Form</i></h1>
+
+<div id="orderform">
+
+    <div><input type="checkbox" id="order1"><label>Cheese Deluxe Brugers</label></div>
+        
+    <div><input type="checkbox" id="order2"><label>World Famous FrenchFries</label></div>
+    
+    <div><input type="checkbox" id="order3"><label>Chicken Sandwiches</label></div>
+    
+    <div><input type="checkbox" id="order4"><label>Baycon,Egg and cheese meal</label></div>
+    
+    <div><input type="checkbox" id="order5"><label>Blueberry Muffin</label></div>
+    
+    <div><input type="checkbox" id="order6"><label>Iced Coffee</label></div>
+
+    <div><input type="checkbox" id="order7"><label>Vanilla Cone</label></div>
+
+    <div><input type="checkbox" id="order8"><label>Hot Chocolate</label></div>
+
+    <button onclick="OrderFood()">ORDER FOOD</button>
+   
+</div>
+
+<div id="items">
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</div>
+
+
+</body>
+</html>
+
+<script>
+    var data=[ 
+    {
+        image_url:"https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-qpc-deluxe-burger:1-4-product-tile-desktop",
+        name:"Cheese Deluxe Brugers",
+        orderno:"1",
+    },
+    {
+        image_url:"https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-fries-small:1-4-product-tile-desktop",
+        name:"World Famous FrenchFries",
+        orderno:"2",
+    },
+    {
+        image_url:"https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-spicy-deluxe-crispy-chicken-sandwich:1-4-product-tile-desktop",
+        name:"Chicken Sandwiches",
+        orderno:"3",
+    },
+    {
+        image_url:"https://s7d1.scene7.com/is/image/mcdonalds/h-mcdonalds-Bacon-Egg-Cheese-McGriddles-Extra-Value-Meals:1-4-product-tile-desktop",
+        name:"Baycon,Egg and cheese meal",
+        orderno:"4",
+    },
+    {
+        image_url:"https://s7d1.scene7.com/is/image/mcdonalds/t-blueberry-muffin-bakery-mcd:1-4-product-tile-desktop",
+        name:"Blueberry Muffin",
+        orderno:"5",
+    },
+    {
+        image_url:"https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Premium-Roast-Iced-Coffee-Medium:1-4-product-tile-desktop",
+        name:"Iced Coffee",
+        orderno:"6",
+    },
+    {
+        image_url:"https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Vanilla-Reduced-Fat-Ice-Cream-Cone:1-4-product-tile-desktop",
+        name:"Vanilla Cone",
+        orderno:"7",
+    },
+    {
+        image_url:"https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-McCafe-Hot-Chocolate-Medium:1-4-product-tile-desktop",
+        name:"Hot Chocolate",
+        orderno:"8",
+    },
+    ]
+
+var container=document.querySelector("#items")
+data.map(function(el)
+{
+    var itemss=document.createElement("div");
+
+    var name=document.createElement("h4");
+    name.textContent=el.name;
+    name.style.textAlign="center"
+    name.style.fontSize="18px"
+
+    var img=document.createElement("img")
+    img.src=el.image_url;
+    img.style.width="250px";
+    img.style.height="200px";
+    img.style.borderRadius="10px";
+
+    img.addEventListener("click",function()
+    {
+      addToScreen(el)
+    })
+    itemss.append(name,img);
+    document.querySelector("#items").append(itemss)
+})
+
+
+function OrderFood()
+    {
+        container.innerHTML=""
+        var msg= document.createElement("h2");
+        msg.textContent="Your Order is sucessfull,Cheers!!!";
+        
+    let orderidentity=Math.ceil(Math.random()*50);
+    // orderidentity.textContent=`Order no is ${orderidentity}`;
+    box1=document.createElement("div");
+    box1.append(msg,orderidentity)
+
+    document.querySelector("#items").append(box1);
+  
+    let queue =[];
+    var u = document.getElementById("order1");
+    var v = document.getElementById("order2");
+    var w = document.getElementById("order3");
+    var x = document.getElementById("order4");
+    var y = document.getElementById("order5");
+    var z = document.getElementById("order6");
+    var a = document.getElementById("order7");
+    var b = document.getElementById("order8");
+
+  if(u.checked==true)
+  {
+     queue.push("Cheese Deluxe Brugers")
+  } 
+  if(v.checked==true)
+  {
+     queue.push("World Famous FrenchFries")
+  } 
+  if(w.checked==true)
+  {
+     queue.push("Chicken Sandwiches")
+  } 
+  if(x.checked==true)
+{
+     queue.push("Baycon,Egg and cheese meal")
+  }
+  if(y.checked==true)
+{
+     queue.push("Blueberry Muffin")
+  } 
+  if(z.checked==true)
+ {
+     queue.push("Iced Coffee")
+  }
+  if(a.checked==true)
+ {
+     queue.push("Vanilla Cone")
+  }
+  if(b.checked==true)
+ {
+     queue.push("Hot Chocolate")
+  }
+
+    let promise = new Promise(function (resolve, reject) 
+    {
+    setInterval(function () 
+    {
+      if (queue[0] != null) 
+      {
+         resolve("Your order is ready");
+      }
+      else
+      {
+        reject("There is no pending order")
+      }
+    },5000);
+  });
+  
+  promise.then(function (res)
+  {
+  msg.textContent="";
+  document.querySelector("#items").append(msg)
+   
+  if(u.checked==true)
+  { 
+     var Card1 = document.createElement("img");
+     Card1.src ="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-qpc-deluxe-burger:1-4-product-tile-desktop";
+     Card1.style.width="250px";
+     Card1.style.height="230px";
+    var p1 = document.createElement("h4");
+    p1.textContent= "Cheese Deluxe Burgers";
+    div21=document.createElement("div");
+    div21.append(p1,Card1);
+    document.querySelector("#items").append(div21)
+    } 
+
+  if(v.checked==true)
+  {
+    var Card2 = document.createElement("img");
+    Card2.src = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-fries-small:1-4-product-tile-desktop";
+    Card2.style.width="250px";
+    Card2.style.height="230px";
+    var p2 = document.createElement("h4");
+    p2.textContent= "World Famous FrenchFries";
+    div22=document.createElement("div");
+    div22.append(p2,Card2);
+    document.querySelector("#items").append(div22)  
+  } 
+  
+  if(w.checked==true)
+  {
+    var Card3 = document.createElement("img");
+    Card3.src = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-spicy-deluxe-crispy-chicken-sandwich:1-4-product-tile-desktop"
+    Card3.style.width="250px";
+    Card3.style.height="230px";
+    var p3 = document.createElement("h4");
+    p3.textContent= "Chicken Sandwiches";
+    div23=document.createElement("div");
+    div23.append(p3,Card3);
+    document.querySelector("#items").append(div23);
+  } 
+  
+  if(x.checked==true)
+  {
+    var Card4 = document.createElement("img");
+    Card4.src = "https://s7d1.scene7.com/is/image/mcdonalds/h-mcdonalds-Bacon-Egg-Cheese-McGriddles-Extra-Value-Meals:1-4-product-tile-desktop"
+    Card4.style.width="250px";
+    Card4.style.height="230px";
+    var p4 = document.createElement("h4");
+    p4.textContent= "Baycon,Egg and cheese meal";
+    div24=document.createElement("div");
+    div24.append(p4,Card4);
+    document.querySelector("#items").append(div24);  
+  }
+  if(y.checked==true)
+  {
+    var Card5 = document.createElement("img");
+    Card5.src = "https://s7d1.scene7.com/is/image/mcdonalds/t-blueberry-muffin-bakery-mcd:1-4-product-tile-desktop"
+    Card5.style.width="250px";
+    Card5.style.height="230px";
+    var p4 = document.createElement("h4");
+    p4.textContent= "Blueberry Muffin";    
+    div24=document.createElement("div");
+    div24.append(p4,Card5);
+    document.querySelector("#items").append(div24);  
+  }
+  if(z.checked==true)
+  {
+    var Card6 = document.createElement("img");
+    Card6.src = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Premium-Roast-Iced-Coffee-Medium:1-4-product-tile-desktop"
+    Card6.style.width="250px";
+    Card5.style.height="230px";
+    var p4 = document.createElement("h4");
+    p4.textContent= "Iced Coffee";
+    div24=document.createElement("div");
+    div24.append(p4,Card6);
+    document.querySelector("#items").append(div24);  
+  }
+  if(a.checked==true)
+  {
+    var Card7 = document.createElement("img");
+    Card7.src = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Vanilla-Reduced-Fat-Ice-Cream-Cone:1-4-product-tile-desktop"
+    Card7.style.width="250px";
+    Card7.style.height="230px";
+    var p4 = document.createElement("h4");
+    p4.textContent= "Vanilla Cone";
+    div24=document.createElement("div");
+    div24.append(p4,Card7);
+    document.querySelector("#items").append(div24);  
+  }
+  if(b.checked==true)
+  {
+    var Card8 = document.createElement("img");
+    Card8.src = "https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-McCafe-Hot-Chocolate-Medium:1-4-product-tile-desktop"
+    Card8.style.width="250px";
+    Card8.style.height="230px";
+    var p4 = document.createElement("h4");
+    p4.textContent= "Hot Chocolate";
+    div24=document.createElement("div");
+    div24.append(p4,Card8);
+    document.querySelector("#items").append(div24);  
+  }
+
+  });
+  promise.catch(function (err)
+  {
+      alert(err)
+  })
+}
+</script>
